@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useWeather } from "../hooks/backendQuery";
-import snowflake from "../../public/snowflake.svg";
-import sun from "../../public/sun.svg";
+import snowflake from "../assets/snowflake.svg";
+import sun from "../assets/sun.svg";
 
 export const WeatherComponent: React.FC = () => {
   const [inputPostalcode, setinputPostalcode] = useState("");
