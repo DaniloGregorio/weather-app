@@ -1,17 +1,17 @@
 import { Request, Response, NextFunction } from "express";
 
-export const CEPQuery = async (
+export const PCQuery = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const { cep } = req.body;
+  const { postalCode } = req.body;
 
-  if (!cep) {
-    return res.status(400).json({ error: "CEP is mandatory" });
+  if (!postalCode) {
+    return res.status(400).json({ error: "Postal code is mandatory" });
   }
 
-  const url = `https://nominatim.openstreetmap.org/search?format=json&postalcode=${cep}&country=Brazil&limit=1`;
+  const url = `https://nominatim.openstreetmap.org/search?format=json&postalcode=${postalCode}&limit=1`;
 
   try {
     const response = await fetch(url, {
@@ -22,7 +22,7 @@ export const CEPQuery = async (
     const data = await response.json();
 
     if (!data || data.length === 0) {
-      return res.status(404).json({ error: "coordinates no found" });
+      return res.status(404).json({ error: "Postal code no found" });
     }
 
     const { lat, lon, display_name } = data[0];
